@@ -13,7 +13,7 @@ jobs:
         run: git clone --depth 1 https://github.com/mokouliszt/android-apk-builder.git builder
       - name: Build portable toolchain skill
         working-directory: builder
-        run: ./build_payload.sh
+        run: bash ./build_payload.sh
       - name: Upload toolchain artifact
         uses: actions/upload-artifact@v4
         with:
