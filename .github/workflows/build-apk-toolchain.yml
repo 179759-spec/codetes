@@ -11,6 +11,11 @@ jobs:
     steps:
       - name: Fetch builder source
         run: git clone --depth 1 https://github.com/mokouliszt/android-apk-builder.git builder
+      - name: Normalize builder layout
+        working-directory: builder
+        run: |
+          cp skill/android-apk-builder/SKILL.md skill/SKILL.md
+          cp -r skill/android-apk-builder/scripts skill/scripts
       - name: Build portable toolchain skill
         working-directory: builder
         run: bash ./build_payload.sh
