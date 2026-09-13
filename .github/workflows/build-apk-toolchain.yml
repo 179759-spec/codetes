@@ -1,0 +1,22 @@
+name: Build temporary Android APK toolchain
+
+on:
+  push:
+    paths:
+      - '.github/workflows/build-apk-toolchain.yml'
+
+jobs:
+  build-toolchain:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch builder source
+        run: git clone --depth 1 https://github.com/mokouliszt/android-apk-builder.git builder
+      - name: Build portable toolchain skill
+        working-directory: builder
+        run: ./build_payload.sh
+      - name: Upload toolchain artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk-builder-skill
+          path: builder/dist/android-apk-builder.skill
+          retention-days: 1
